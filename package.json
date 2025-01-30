@@ -2,6 +2,7 @@
   "name": "eval-test-qualite_adrien_selmane",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
@@ -9,13 +10,18 @@
     "@types/cors": "^2.8.17",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.7",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "nodemon": "^3.1.9"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon --watch src --exec ts-node src/index.ts",
-    "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
+    "lint": "eslint .",
     "test": "vitest tests/",
     "test:e2e": "playwright test"
   },
@@ -28,12 +34,7 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.12.0",
     "@types/supertest": "^6.0.2",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@typescript-eslint/parser": "^8.22.0",
     "cors": "^2.8.5",
-    "eslint": "^9.19.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.3",
     "express": "^4.21.2",
     "playwright": "^1.50.0",
     "prettier": "^3.4.2",

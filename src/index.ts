@@ -18,7 +18,7 @@ app.use(express.json());
  * @param {Response} res - The response object.
  */
 app.get('/', (req: Request, res: Response) => {
-    res.sendFile('index.html', { root: 'frontend' });
+  res.sendFile('index.html', { root: 'frontend' });
 });
 
 /**
