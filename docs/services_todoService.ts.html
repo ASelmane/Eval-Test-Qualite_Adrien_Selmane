@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> services/todoService.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Interfaces</h3><ul><li><a href="Todo.html">Todo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createTodo">createTodo</a></li><li><a href="global.html#deleteTodo">deleteTodo</a></li><li><a href="global.html#getTodo">getTodo</a></li><li><a href="global.html#getTodos">getTodos</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#updateTodo">updateTodo</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>services/todoService.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Todo } from '../models/todo';
+
+let todos: Todo[] = [];
+let idCounter = 1;
+
+/**
+ * Retrieves all todos.
+ * @returns {Todo[]} An array of all todos.
+ */
+export function getTodos(): Todo[] {
+  return todos;
+}
+
+/**
+ * Retrieves a todo by ID.
+ * @param {number} id - The ID of the todo to retrieve.
+ * @returns {Todo | undefined} The todo with the specified ID, or undefined if not found.
+ */
+export function getTodo(id: number): Todo | undefined {
+  return todos.find((todo) => todo.id === id);
+}
+
+/**
+ * Creates a new todo.
+ * @param {string} title - The title of the new todo.
+ * @returns {Todo} The created todo.
+ */
+export function createTodo(title: string): Todo {
+  const newTodo: Todo = { id: idCounter++, title, completed: false };
+  todos.push(newTodo);
+  return newTodo;
+}
+
+/**
+ * Updates a todo by ID.
+ * @param {number} id - The ID of the todo to update.
+ * @param {string} title - The new title of the todo.
+ * @param {boolean} completed - The new completion status of the todo.
+ * @returns {Todo | undefined} The updated todo, or undefined if not found.
+ */
+export function updateTodo(
+  id: number,
+  title: string,
+  completed: boolean,
+): Todo | undefined {
+  const todo = getTodo(id);
+  if (todo) {
+    todo.title = title;
+    todo.completed = completed;
+  }
+  return todo;
+}
+
+/**
+ * Deletes a todo by ID.
+ * @param {number} id - The ID of the todo to delete.
+ * @returns {boolean} True if the todo was deleted, false otherwise.
+ */
+export function deleteTodo(id: number): boolean {
+  const index = todos.findIndex((todo) => todo.id === id);
+  if (index !== -1) {
+    todos.splice(index, 1);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Resets all todos.
+ */
+export function reset(): void {
+  todos = [];
+  idCounter = 1;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

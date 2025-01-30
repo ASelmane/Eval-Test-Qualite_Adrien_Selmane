@@ -3,12 +3,6 @@ import * as todoController from '../controllers/todoController';
 
 const router = Router();
 
-/**
- * @swagger
- * tags:
- *   name: Todos
- *   description: Todo management
- */
 router.get('/todos', todoController.getTodos);
 router.get('/todos/:id', todoController.getTodo);
 router.post('/todos', todoController.createTodo);
