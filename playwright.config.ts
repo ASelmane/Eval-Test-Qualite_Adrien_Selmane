@@ -6,6 +6,7 @@ export default defineConfig({
     {
       command: 'npm start',
       port: 3000,
+      reuseExistingServer: !process.env.CI,
     },
   ],
   use: {
