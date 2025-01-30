@@ -9,7 +9,7 @@ test.describe('Todo Frontend', () => {
     await page.fill('#input-todo', 'New Todo');
     await page.click('#add-todo');
     await page.waitForSelector('#todo-list li');
-    const todoText = await page.textContent('#todo-list li span');
+    const todoText = await page.textContent('#todo-list li .todo');
     expect(todoText).toBe('New Todo');
     await page.click('#reset-todo');
   });
@@ -29,11 +29,12 @@ test.describe('Todo Frontend', () => {
     await page.fill('#input-todo', 'Todo 1');
     await page.click('#add-todo');
     await page.waitForSelector('#todo-list li');
-    await page.check('#todo-list li input[type="checkbox"]');
-    const isChecked = await page.isChecked(
-      '#todo-list li input[type="checkbox"]',
+    await page.click('#todo-list li .todo');
+    const bgColor = await page.$eval(
+      '#todo-list li',
+      (el) => getComputedStyle(el).backgroundColor,
     );
-    expect(isChecked).toBe(true);
+    expect(bgColor).toBe('rgba(209, 213, 219, 0.8)');
     await page.click('#reset-todo');
   });
 

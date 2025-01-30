@@ -2,7 +2,6 @@
   "name": "eval-test-qualite_adrien_selmane",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "directories": {
     "test": "tests"
   },
