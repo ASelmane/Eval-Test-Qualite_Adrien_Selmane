@@ -1,0 +1,64 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Todo API', () => {
+    test.beforeEach(async ({ request }) => {
+      // Clear all todos before each test
+      const response = await request.delete('/api/todos');
+      expect(response.ok()).toBeTruthy();
+    });
+  
+    test('should create a new todo', async ({ request }) => {
+      const response = await request.post('/api/todos', {
+        data: { title: 'Test Todo' },
+      });
+      expect(response.ok()).toBeTruthy();
+      const todo = await response.json();
+      expect(todo.title).toBe('Test Todo');
+    });
+  
+    test('should get all todos', async ({ request }) => {
+      await request.post('/api/todos', { data: { title: 'Test Todo 1' } });
+      await request.post('/api/todos', { data: { title: 'Test Todo 2' } });
+      const response = await request.get('/api/todos');
+      expect(response.ok()).toBeTruthy();
+      const todos = await response.json();
+      expect(todos.length).toBe(2);
+    });
+  
+    test('should get a todo by id', async ({ request }) => {
+      const createResponse = await request.post('/api/todos', {
+        data: { title: 'Test Todo' },
+      });
+      const todo = await createResponse.json();
+      const getResponse = await request.get(`/api/todos/${todo.id}`);
+      expect(getResponse.ok()).toBeTruthy();
+      const fetchedTodo = await getResponse.json();
+      expect(fetchedTodo.title).toBe('Test Todo');
+    });
+  
+    test('should update a todo', async ({ request }) => {
+      const createResponse = await request.post('/api/todos', {
+        data: { title: 'Test Todo' },
+      });
+      const todo = await createResponse.json();
+      const updateResponse = await request.put(`/api/todos/${todo.id}`, {
+        data: { title: 'Updated Todo', completed: true },
+      });
+      expect(updateResponse.ok()).toBeTruthy();
+      const updatedTodo = await updateResponse.json();
+      expect(updatedTodo.title).toBe('Updated Todo');
+      expect(updatedTodo.completed).toBe(true);
+    });
+  
+    test('should delete a todo', async ({ request }) => {
+      const createResponse = await request.post('/api/todos', {
+        data: { title: 'Test Todo' },
+      });
+      const todo = await createResponse.json();
+      const deleteResponse = await request.delete(`/api/todos/${todo.id}`);
+      expect(deleteResponse.ok()).toBeTruthy();
+      const getResponse = await request.get(`/api/todos/${todo.id}`);
+      expect(getResponse.status()).toBe(404);
+    });
+  });
+  
