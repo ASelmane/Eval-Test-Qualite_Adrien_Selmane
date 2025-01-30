@@ -1,4 +1,4 @@
-# Todo List Application
+# Todo List Application - Adrien Selmane
 
 Cette application est une API de gestion de tâches (Todo) avec une interface frontend. Elle utilise Express pour le backend, Playwright pour les tests end-to-end, et JSDoc pour la documentation.
 
@@ -20,7 +20,7 @@ Cette application est une API de gestion de tâches (Todo) avec une interface fr
    npx playwright install --with-deps
    ```
 
-## Installation
+## Utilisation
 
 ### Démarrer le serveur
 
